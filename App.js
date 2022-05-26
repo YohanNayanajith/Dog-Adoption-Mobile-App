@@ -21,11 +21,14 @@ export default function App() {
                 screenOptions={{
                     headerShown: false,
                 }}
-                initialRouteName={'Home'}
+                initialRouteName={'Log'}
             >
-                {/* <Stack.Screen name="Home" component={Home} /> */}
+                
+                <Stack.Screen name="Login" component={Login} />
                 <Stack.Screen name="Tabs" component={Tabs} />
+                <Stack.Screen name="Home" component={Home} />
                 <Stack.Screen name="Event" component={Event} />
+                <Stack.Screen name="Register" component={Register} />
                 <Stack.Screen name="Setting" component={Setting} />
                 <Stack.Screen name="PetsDetail" component={PetsDetail} />
             </Stack.Navigator>

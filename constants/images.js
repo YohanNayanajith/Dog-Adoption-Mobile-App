@@ -7,6 +7,7 @@ const avatar_5 = require("../assets/images/avatar-5.jpg");
 const dog_image1 = require("../assets/images/dog-image1.jpg");
 const dog_image2 = require("../assets/images/dog-image2.jpg");
 const dog_image3 = require("../assets/images/dog-image3.jpg");
+const logo = require("../assets/images/logo.jpg");
 
 export default {
     avatar_1,
@@ -17,4 +18,5 @@ export default {
     dog_image1,
     dog_image2,
     dog_image3,
+    logo,
 }
