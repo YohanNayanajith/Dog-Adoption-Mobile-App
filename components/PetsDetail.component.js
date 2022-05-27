@@ -19,7 +19,7 @@ const PetsDetail = ({navigation, route}) => {
         <View style={{height: 400, backgroundColor: COLORS.background}}>
           <ImageBackground
             resizeMode="contain"
-            source={pet?.image}
+            source={{uri:pet?.image}}
             style={{
               height: 280,
               top: 20,
@@ -61,7 +61,7 @@ const PetsDetail = ({navigation, route}) => {
             <View style={{marginTop: 5, flexDirection: 'row'}}>
               <Icon name="map-marker" color={COLORS.primary} size={20} />
               <Text style={{fontSize: 14, color: COLORS.grey, marginLeft: 5}}>
-                5 Bulvarna-Kudriavska Street, Kyiv
+                {pet.address}
               </Text>
             </View>
           </View>

@@ -6,6 +6,8 @@ import SocialSignInButtons from '../components/SocialSignInButtons.component';
 import {useNavigation} from '@react-navigation/core';
 import {useForm} from 'react-hook-form';
 
+const URL = "https://62907d9827f4ba1c65ba1783.mockapi.io/api/v1/register";
+
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
@@ -14,11 +16,36 @@ const Register = () => {
   const pwd = watch('password');
   const navigation = useNavigation();
 
-  const onRegisterPressed = () => {
+  const onRegisterPressed = async (data) => {
+    console.log(data);
+    try {
+      let response = await fetch(URL,{
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: data.username,
+          telephone_no: data.username,
+          address: data.address,
+          email: data.email,
+          password: data.password,
+          confirm_password: data.password_repeat
+        })
+      });
+      let json = await response.json();
+      console.log(json);
+      // setData(json);
+      // setLoading(false);
+      
+    } catch (error) {
+      alert(error);
+    }
     navigation.navigate('Login');
   };
 
-  const onSignInPress = () => {
+  const onSignInPress = (data) => {
     navigation.navigate('Login');
   };
 
@@ -61,6 +88,30 @@ const Register = () => {
           }}
         />
         <CustomInput
+          name="telephone_no"
+          control={control}
+          placeholder="Conatact No"
+          rules={{
+            required: 'Email is required',
+            minLength: {
+              value: 9,
+              message: 'Telephone No should be at least 9 numbers long',
+            },
+            maxLength: {
+              value: 12,
+              message: 'Telephone No should be max 12 characters long',
+            },
+          }}
+        />
+        <CustomInput
+          name="address"
+          control={control}
+          placeholder="Address"
+          rules={{
+            required: 'Address is required'
+          }}
+        />
+        <CustomInput
           name="password"
           control={control}
           placeholder="Password"
@@ -74,7 +125,7 @@ const Register = () => {
           }}
         />
         <CustomInput
-          name="password-repeat"
+          name="password_repeat"
           control={control}
           placeholder="Repeat Password"
           secureTextEntry
