@@ -6,10 +6,17 @@ import {
     TouchableOpacity,
     Image
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { icons, SIZES, COLORS } from '../constants';
 
 const Header = (props) => {
+
+    const navigation = useNavigation();
+    const signOut = () => {
+        navigation.navigate("Login");
+    }
+
     return (
             <View style={{ flexDirection: 'row', height: 50 }}>
                 <TouchableOpacity
@@ -50,9 +57,10 @@ const Header = (props) => {
                         paddingRight: SIZES.padding * 2,
                         justifyContent: 'center'
                     }}
+                    onPress={signOut}
                 >
                     <Image
-                        source={icons.setting}
+                        source={icons.logout}
                         resizeMode="contain"
                         style={{
                             width: 30,

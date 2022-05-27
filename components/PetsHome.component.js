@@ -38,7 +38,7 @@ const Card = ({ pet, navigation }) => {
         {/* Render the card image */}
         <View style={style.cardImageContainer}>
           <Image
-            source={{uri:pet.image}}
+            source={{uri:pet.pet_image}}
             style={{
               width: "100%",
               height: "100%",
@@ -56,24 +56,24 @@ const Card = ({ pet, navigation }) => {
             <Text
               style={{ fontWeight: "bold", color: COLORS.dark, fontSize: 20 }}
             >
-              {pet?.name}
+              {pet?.pet_name}
             </Text>
-            <Icon name="gender-male" size={22} color={COLORS.grey} />
+            {/* <Icon name="gender-male" size={22} color={COLORS.grey} /> */}
           </View>
 
           {/* Render the age and type */}
-          <Text style={{ fontSize: 12, marginTop: 5, color: COLORS.dark }}>
-            {pet?.type}
-          </Text>
+          {/* <Text style={{ fontSize: 12, marginTop: 5, color: COLORS.dark }}>
+            {pet?.description}
+          </Text> */}
           <Text style={{ fontSize: 10, marginTop: 5, color: COLORS.grey }}>
             {pet?.age}
           </Text>
 
           {/* Render distance and the icon */}
           <View style={{ marginTop: 5, flexDirection: "row" }}>
-            <Icon name="map-marker" color={COLORS.primary} size={18} />
+            <Icon name="gender-male-female-variant" color={COLORS.primary} size={18} />
             <Text style={{ fontSize: 12, color: COLORS.grey, marginLeft: 5 }}>
-              Distance:7.8km
+              {pet?.gender}
             </Text>
           </View>
         </View>
@@ -88,8 +88,6 @@ const PetsHome = () => {
 
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  const [title, setTitle] = useState([]);
-  const [description, setDescription] = useState([]);
 
   const navigation = useNavigation();
 
@@ -98,8 +96,6 @@ const PetsHome = () => {
       .then((response) => response.json()) // get response, convert to json
       .then((json) => {
         setData(json);
-        // setTitle(json.title);
-        // setDescription(json.description);
       })
       .catch((error) => alert(error)) // display errors
       .finally(() => setLoading(false)); // change loading state
@@ -111,28 +107,11 @@ const PetsHome = () => {
       let response = await fetch(URL);
       let json = await response.json();
       setData(json);
-      // setTitle(json.title);
-      // setDescription(json.description);
       setLoading(false);
     } catch (error) {
       alert(error);
     }
   }
-
-  // componentDidMount = () => {
-  //   this.getMoviesAsync();
-  // }
-
-  // const fliterPet = index => {
-  //   const currentPets = pets.filter(
-  //     item => item?.pet?.toUpperCase() == petCategories[index].name,
-  //   )[0]?.pets;
-  //   setFilteredPets(currentPets);
-  // };
-
-  // React.useEffect(() => {
-  //   fliterPet(0);
-  // }, []);
 
   return (
     <SafeAreaView style={{ flex: 1, color: COLORS.white }}>

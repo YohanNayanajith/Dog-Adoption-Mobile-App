@@ -8,7 +8,7 @@ const EventDetail = (props) => {
         
         <View style={styles.item}>
             <View style={styles.title}>
-                <Text style={{ fontSize: SIZES.h2, lineHeight:30, fontWeight:"bold"}}>{props.text.title}</Text>
+                <Text style={{ fontSize: SIZES.h2, lineHeight:30, fontWeight:"bold"}}>{props.text.name}</Text>
                 <Text style={{ fontSize: SIZES.h4, lineHeight:26, paddingTop: 10}}>{props.text.description}</Text>
                 
             </View>
@@ -27,13 +27,13 @@ const EventDetail = (props) => {
             <View style={styles.container}>
                 <Icon name="phone" color={COLORS.primary} size={20} />
                 <Text style={{fontSize: 14, color: COLORS.grey, marginLeft: 5}}>
-                    {props.text.contact}
+                    {props.text.tp}
                 </Text>
             </View>
             <View style={styles.container}>
                 <Icon name="map-marker" color={COLORS.primary} size={20} />
                 <Text style={{fontSize: 14, color: COLORS.grey, marginLeft: 5}}>
-                    {props.text.address}
+                    {props.text.location}
                 </Text>
             </View>
             {/* <View style={styles.itemLeft}> */}

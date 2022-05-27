@@ -29,18 +29,6 @@ const Event = () => {
       .finally(() => setLoading(false)); // change loading state
   }, []);
 
-  // Also get call asynchronous function
-//   async function getMoviesAsync() {
-//     try {
-//       let response = await fetch(URL);
-//       let json = await response.json();
-//       setData(json);
-//       setLoading(false);
-//     } catch (error) {
-//       alert(error);
-//     }
-//   }
-
   let count = 0;
 
   function setEvents() {

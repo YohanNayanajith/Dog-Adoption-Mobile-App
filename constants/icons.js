@@ -8,6 +8,7 @@ export const event = require("../assets/icons/event.png");
 export const home = require("../assets/icons/home.png");
 export const star = require("../assets/icons/star.png");
 export const like = require("../assets/icons/like.png");
+export const logout = require("../assets/icons/logout.png");
 
 export default {
     back,
@@ -20,4 +21,5 @@ export default {
     home,
     star,
     like,
+    logout,
 }

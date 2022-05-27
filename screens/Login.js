@@ -16,6 +16,8 @@ import SocialSignInButtons from "../components/SocialSignInButtons.component";
 import { useNavigation } from "@react-navigation/native";
 import { useForm, Controller } from "react-hook-form";
 
+const URL = "https://62907d9827f4ba1c65ba1783.mockapi.io/api/v1/register";
+
 const Login = () => {
   const { height } = useWindowDimensions();
   const navigation = useNavigation();
@@ -26,15 +28,32 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const onSignInPressed = (data) => {
+  const onSignInPressed = async (data) => {
     console.log(data);
-    // validate user
-    navigation.navigate("Tabs");
+    let flag = false;
+    try {
+      let response = await fetch(URL);
+      let result = await response.json();
+        result.map((x) => {
+          if((x.name == data.username) && (x.password == data.password)){
+            flag = true;
+          }
+        });
+
+        if(flag){
+          navigation.navigate("Tabs");
+        }else {
+          alert("Entered username & password is wrong!");
+        }
+    } catch (error) {
+      alert(error);
+    }
+
   };
 
-//   const onForgotPasswordPressed = () => {
-//     navigation.navigate("ForgotPassword");
-//   };
+  //   const onForgotPasswordPressed = () => {
+  //     navigation.navigate("ForgotPassword");
+  //   };
 
   const onSignUpPress = () => {
     navigation.navigate("Register");
