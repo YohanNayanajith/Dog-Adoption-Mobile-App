@@ -16,15 +16,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { icons, images, SIZES, COLORS } from "../constants";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import pets from "../constants/pets";
 const { height } = Dimensions.get("window");
-
-// const petCategories = [
-//     {name: 'DOGS', icon: 'dog'},
-//     {name: 'CATS', icon: 'cat'},
-//     {name: 'BIRDS', icon: 'ladybug'},
-//     {name: 'BUNNIES', icon: 'rabbit'},
-//   ];
 
 const URL = "https://62907d9827f4ba1c65ba1783.mockapi.io/api/v1/pets";
 

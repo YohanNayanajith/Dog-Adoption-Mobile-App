@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Text,
   ImageBackground,
@@ -9,42 +9,87 @@ import {
   StyleSheet,
   Button,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { SIZES, COLORS } from "../constants";
 
 const URL = "https://62907d9827f4ba1c65ba1783.mockapi.io/api/v1/adoptions";
+const URL_register = "https://62907d9827f4ba1c65ba1783.mockapi.io/api/v1/register";
 
 const PetsDetail = ({ navigation, route }) => {
+  const [userName, setUserName] = useState([]);
+  const navigation = useNavigation();
   const pet = route.params;
 
-  const updateAdoption = () => {
-    console.log("Update adoption");
-    // try {
-    //   let response = await fetch(URL,{
-    //     method: 'POST',
-    //     headers: {
-    //       Accept: 'application/json',
-    //       'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({
-    //       name: data.username,
-    //       telephone_no: data.username,
-    //       address: data.address,
-    //       email: data.email,
-    //       password: data.password,
-    //       confirm_password: data.password_repeat
-    //     })
-    //   });
-    //   let json = await response.json();
-    //   console.log(json);
-    //   // setData(json);
-    //   // setLoading(false);
+  let date = new Date();
+  let current_date = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+
+  const updatePets = async() => {
+    const URL_pets = "https://62907d9827f4ba1c65ba1783.mockapi.io/api/v1/pets/"+pet?.id;
+    try {
+      let response = await fetch(URL_pets,{
+        method: 'PUT',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          id:pet?.id,
+          pet_image:pet?.pet_image,
+          pet_name: pet?.pet_name,
+          gender: pet?.gender, 
+          age:pet?.age,  
+          description:pet?.description,
+          vaccinated:pet?.vaccinated,
+          adopted: "Yes",
+        })
+      });
+      let json = await response.json();
+      console.log(json);
       
-    // } catch (error) {
-    //   alert(error);
-    // }
+    } catch (error) {
+      alert(error);
+    }
+  }
+
+  const updateAdoption = async () => {
+    getUserName();
+    console.log("Update adoption");
+    try {
+      let response = await fetch(URL,{
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          id:null,
+          pet_image:pet?.pet_image,
+          pet_name: pet?.pet_name,
+          owner: userName,
+          date: current_date,
+        })
+      });
+      let json = await response.json();
+      updatePets();
+      console.log(json);
+      alert("Successfully!");
+      navigation.navigate("Home");
+    } catch (error) {
+      alert(error);
+    }
     
   };
+
+  const getUserName = async() => {
+    try {
+      let response = await fetch(URL_register);
+      let json = await response.json();
+      setUserName(json);
+    } catch (error) {
+      alert(error);
+    }
+  }
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
