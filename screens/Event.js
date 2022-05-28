@@ -11,7 +11,6 @@ import {
 import { icons, images, SIZES, COLORS } from "../constants";
 import Header from "../components/Header.component";
 import EventDetail from "../components/Event.component";
-import eventDetails from "../constants/eventsData";
 
 const URL = "https://62907d9827f4ba1c65ba1783.mockapi.io/api/v1/events";
 

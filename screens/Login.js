@@ -7,6 +7,7 @@ import {
   useWindowDimensions,
   ScrollView,
   TextInput,
+  AsyncStorage,
 } from "react-native";
 import Logo from "../assets/images/logo.jpg";
 // import images from '../constants';
@@ -15,6 +16,7 @@ import CustomButton from "../components/CustomButton.component";
 import SocialSignInButtons from "../components/SocialSignInButtons.component";
 import { useNavigation } from "@react-navigation/native";
 import { useForm, Controller } from "react-hook-form";
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const URL = "https://62907d9827f4ba1c65ba1783.mockapi.io/api/v1/register";
 
@@ -37,6 +39,8 @@ const Login = () => {
         result.map((x) => {
           if((x.name == data.username) && (x.password == data.password)){
             flag = true;
+            AsyncStorage.setItem("userName",x.name);
+            // <eventsData data={x.name} />
           }
         });
 

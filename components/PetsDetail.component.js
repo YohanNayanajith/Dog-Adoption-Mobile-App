@@ -8,17 +8,20 @@ import {
   Image,
   StyleSheet,
   Button,
+  AsyncStorage,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { SIZES, COLORS } from "../constants";
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const URL = "https://62907d9827f4ba1c65ba1783.mockapi.io/api/v1/adoptions";
 const URL_register = "https://62907d9827f4ba1c65ba1783.mockapi.io/api/v1/register";
 
 const PetsDetail = ({ navigation, route }) => {
   const [userName, setUserName] = useState([]);
-  const navigation = useNavigation();
+  const [userNameLogin, setUserNameLogin] = useState('');
+  // const navigations = useNavigation();
   const pet = route.params;
 
   let date = new Date();
@@ -55,6 +58,8 @@ const PetsDetail = ({ navigation, route }) => {
   const updateAdoption = async () => {
     getUserName();
     console.log("Update adoption");
+    // AsyncStorage.getItem('userName').then((value)=>setUserNameLogin(value));
+    setUserNameLogin(AsyncStorage.getItem('userName'));
     try {
       let response = await fetch(URL,{
         method: 'POST',
@@ -66,13 +71,14 @@ const PetsDetail = ({ navigation, route }) => {
           id:null,
           pet_image:pet?.pet_image,
           pet_name: pet?.pet_name,
-          owner: userName,
+          owner: userNameLogin["_W"],
           date: current_date,
         })
       });
       let json = await response.json();
       updatePets();
-      console.log(json);
+      console.log(userNameLogin);
+      console.log(userNameLogin["_W"]);
       alert("Successfully!");
       navigation.navigate("Home");
     } catch (error) {
