@@ -4,23 +4,13 @@ import {
     View,
     Text,
     StyleSheet,
-    TouchableOpacity,
-    Image,
-    FlatList
 } from "react-native";
 
-import { icons, images, SIZES, COLORS, FONTS } from '../constants';
-import Search from "../components/Search.component";
+import { icons,SIZES, COLORS } from '../constants';
 import PetsHome from "../components/PetsHome.component";
 import Header from "../components/Header.component";
 
 const Home = ({ navigation }) => {
-
-    // function renderHeader() {
-    //     return (
-            
-    //     )
-    // }
 
     function renderMainCategories() {
         return (

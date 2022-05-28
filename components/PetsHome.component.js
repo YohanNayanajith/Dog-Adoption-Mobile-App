@@ -120,27 +120,19 @@ const PetsHome = () => {
           <Icon name="sort-ascending" size={24} color={COLORS.grey} />
         </View>
 
-        {/* Render the cards with flatlist */}
-        {/* <View style={{ marginTop: 20, marginBottom: 100 }}>
-          <FlatList
-            showsVerticalScrollIndicator={true}
-            data={pets}
-            renderItem={({ item }) => (
-              <Card pet={item} navigation={navigation} />
-            )}
-          />
-        </View> */}
-
         {isLoading ? (
           <ActivityIndicator />
         ) : (
-          <View style={{ marginTop: 20, marginBottom: 100 }}>
+          <View style={{ flex:1,marginTop: 20 }}>
             <FlatList
               data={data}
               keyExtractor={({ id }, index) => id}
               renderItem={({ item }) => (
                 <Card pet={item} navigation={navigation} />
               )}
+              contentContainerStyle={{
+                flexGrow: 1,
+              }}
             />
           </View>
         )}
